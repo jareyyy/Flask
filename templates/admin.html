@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Jost:ital,wght@0,300;0,400;0,600;1,100&family=Quicksand:wght@300..700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='beer.png') }}" type="image/png">
+    <style>
+        /* General body styling */
+        body {
+            font-family: "Quicksand", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200px;
+            font-style: normal;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Page title */
+        h1 {
+            font-size: 2.5rem;
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        /* Form styling */
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center; /* Center-aligns all text */
+            display: flex; /* Makes form a flex container */
+            flex-direction: column; /* Stacks children vertically */
+            align-items: center; /* Centers children horizontally */
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center; /* Center-aligns the label text */
+        }
+
+        form input[type="password"],
+        form input[type="date"] {
+            width: 100%;
+            max-width: 300px; /* Limits input width */
+            padding: 10px;
+            /* margin-bottom: 15px; */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Back to scheduling link */
+        div a {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        div a:hover {
+            text-decoration: none;
+            color: red;
+        }
+
+        div a i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        ul {
+        list-style-type: none; /* This removes the bullets */
+        padding: 0; /* Optional: removes default padding */
+        margin: 0; /* Optional: removes default margin */
+        margin-bottom: 20px;
+        color: red;
+        }
+
+
+        /* Responsive styling */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            form {
+                width: 90%;
+            }
+
+            form label {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Page</h1>
+
+    <!-- Display flashed messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('admin_delete') }}" method="post">
+        <label for="password">Enter Admin Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <label for="date">Select Date to Delete:</label>
+        <input type="date" id="date" name="date" required>
+        <br>
+        <input type="submit" value="Delete Booking">
+    </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <h2>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i>   View Calendar</a>
+        </h2>
+    </div>
+</body>
+</html>

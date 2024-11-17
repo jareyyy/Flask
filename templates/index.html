@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inuman Schedule System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Jost:ital,wght@0,300;0,400;0,600;1,100&family=Quicksand:wght@300..700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='beer.png') }}" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <!-- <h1>Room Booking System</h1> -->
+        <h1>Inuman Session</h1>
+
+        {% if request.args.get('error') %}
+            <p style="color: red;">{{ request.args.get('error') }}</p>
+        {% endif %}
+
+        <form action="/book" method="POST">
+            <!-- <input type="text" name="name" placeholder="Your Name" required> -->
+            <input type="text" name="name" placeholder="Name of Pasimuno" required>
+            <input type="date" name="date" required>
+            <input type="time" name="time" required>
+            <!-- <input type="text" name="room" placeholder="Room Name" required> -->
+            <input type="text" name="room" placeholder="Venue ng Inuman" required>
+            <!-- <button type="submit">Book Room</button> -->
+            <button type="submit">Sched na  </button>
+        </form>
+
+        <!-- <h2>Recent Bookings</h2> -->
+        <h2>Schedules na 'di matutuloy</h2>
+        <ul>
+            {% for booking in bookings %}
+                <!-- <li style="text-align: center; margin-bottom: 10px;">{{ booking.name }} booked {{ booking.room }} on {{ booking.date }}</li> -->
+                <li style="text-align: center; margin-bottom: 10px;">{{ booking.name }} nagyakag mag-inom sa {{ booking.room }} on {{ booking.date }} mga bandang  {{ booking.time }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- <h2>Unavailable Rooms for the Month</h2>
+        <ul>
+            {% for room in unavailable_rooms %}
+                <li>{{ room }}</li>
+            {% endfor %}
+        </ul> -->
+
+        <!-- Link to the calendar view -->
+        <h2>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i>   View Calendar</a>
+        </h2>
+       
+    </div>
+</body>
+</html>

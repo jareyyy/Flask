@@ -1,0 +1,64 @@
+body {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200px;
+    font-style: normal;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color: red;
+}
+
+.calendar {
+    width: 650px;
+    height: 300px;
+    display: table;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.calendar th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.booked {
+    background-color: #f44336; /* Red for booked dates */
+    color: rgb(255, 0, 0); /* Change text color to white for better contrast */
+    /* cursor: not-allowed; Change cursor to indicate it's not clickable */
+}
+
+.clickable {
+    cursor: pointer; /* Change cursor to indicate it's clickable */
+}
+
+.empty {
+    background-color: #e7e7e7; /* Light gray for empty dates */
+}
+
+.calendar td {
+    border: 1px solid #ddd;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.calendar td:hover {
+    background-color: #f1f1f1; /* Light hover effect for clickable dates */
+}

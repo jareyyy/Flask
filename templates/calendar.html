@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Jost:ital,wght@0,300;0,400;0,600;1,100&family=Quicksand:wght@300..700&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='beer.png') }}" type="image/png">
+    <!-- <title>Booking Calendar</title> -->
+    <title>Inuman Calendar</title>
+</head>
+<body>
+    <!-- <h1>Booking Calendar for {{ calendar.month_name[month] }} {{ year }}</h1> -->
+    <h1>Inuman Calendar for {{ calendar.month_name[month] }} {{ year }}</h1>
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{{ url_for('calendar_view', month=prev_month, year=prev_year) }}">
+            <i class="fas fa-chevron-left"></i> Previous Month
+        </a>
+        <span> | </span>
+        <a href="{{ url_for('calendar_view', month=next_month, year=next_year) }}">
+            Next Month <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="/admin" class="admin-link">
+        <i class="fas fa-user-shield"></i> Go to Admin Panel
+        </a>
+    </div>
+    
+
+    <table class="calendar">
+        <thead>
+            <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for week in month_days %}
+            <tr>
+                {% for day in week %}
+                <td class="{% if day == 0 %}empty{% else %}{% if day in booked_dates %}booked{% else %}clickable{% endif %}{% endif %}" 
+                ondblclick="alert('Date: {{ year }}-{{ month }}-{{ day }}{% if day in booked_dates %} (Set na){% endif %}\nAng di pumunta baog {{ room }}\nKaya dapat sumama lahat!! {{ time }}')">
+                {% if day != 0 %}
+                    {{ day }}
+                {% endif %}
+            </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('booking') }}">
+            <i class="fas fa-arrow-left"></i> Back to Scheduling
+        </a>
+    </div>
+    </div>
+
+
+    <!-- <form action="{{ url_for('admin_delete') }}" method="post"> -->
+
+</body>
+</html>
